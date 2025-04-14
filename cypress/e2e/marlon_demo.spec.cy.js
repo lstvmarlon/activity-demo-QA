@@ -6,31 +6,6 @@ describe("MARLON QA CYPRESS DEMO", () => {
     cy.get(":nth-child(1) > #home-card-styled").click({ force: true });
     cy.contains("Card Types").click({ force: true });
 
-    cy.get("tbody").then(($tablebody) => {
-      const tableText = $tablebody.text();
-    
-      // List of card types to check
-      const cardTypes = [
-        "Credit Card",
-        "Debit Card",
-        "Gift Card",
-        "Prepaid Card",
-        "Store Card",
-      ];
-    
-      // Check if any card type is found in the table
-      const hasCardType = cardTypes.some((card) => tableText.includes(card));
-    
-      if (hasCardType) {
-        cy.log("✅ CARD TYPE FOUND!");
-        cy.screenshot();
-      } else {
-        cy.log("❌ NO CARD TYPE FOUND!");
-        cy.wait(4000);
-        cy.screenshot();
-      }
-    });
-
     cy.fixture("Card-types.json").then((data) => {
       for (const key in data) {
         cy.get("#add-button-icon > svg").click({ force: true });
@@ -100,6 +75,13 @@ describe("MARLON QA CYPRESS DEMO", () => {
                 cy.log("Not Existing");
                 cy.screenshot();
               }
+              cy.get('#back-button').click({ force: true })
+              cy.wait(2000);
+              cy.url().should('eq', 'http://localhost:5173/#/pages/masterfile');
+              cy.contains("Card Types").click({ force: true });
+              cy.wait(2000)
+              cy.url().should('eq', 'http://localhost:5173/#/pages/cardType/?menfield=masterfile_card_types');
+              cy.wait(4000);
             });
           }
         });
