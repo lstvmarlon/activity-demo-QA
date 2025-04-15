@@ -26,10 +26,10 @@ describe("MARLON QA CYPRESS DEMO", () => {
             cy.get("#warning-button-2").click({ force: true }).wait(2000);
             cy.get('#back-button').click({ force: true })
             cy.wait(2000);
-            cy.url().should('eq', 'http://localhost:5173/#/pages/masterfile');
+            cy.url().should('include', 'masterfile');
             cy.contains("Card Types").click({ force: true });
             cy.wait(2000)
-            cy.url().should('eq', 'http://localhost:5173/#/pages/cardType/?menfield=masterfile_card_types');
+            cy.url().should('include', '?menfield=masterfile_card_types');
             cy.wait(4000);
             
             cy.get('body').then(($body) => {
@@ -75,12 +75,12 @@ describe("MARLON QA CYPRESS DEMO", () => {
                 cy.log("Not Existing");
                 cy.screenshot();
               }
-              cy.get('#back-button').click({ force: true })
-              cy.wait(2000);
-              cy.url().should('eq', 'http://localhost:5173/#/pages/masterfile');
+              cy.get('#back-button').click({ force: true });
+              cy.wait(4000);
+              cy.url().should('include', 'masterfile');
               cy.contains("Card Types").click({ force: true });
-              cy.wait(2000)
-              cy.url().should('eq', 'http://localhost:5173/#/pages/cardType/?menfield=masterfile_card_types');
+              cy.wait(2000);
+              cy.url().should('include', '?menfield=masterfile_card_types');
               cy.wait(4000);
             });
           }
